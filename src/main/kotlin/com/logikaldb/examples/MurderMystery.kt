@@ -10,7 +10,6 @@ import com.logikaldb.StdLib.notEq
 import com.logikaldb.entity.Goal
 import com.logikaldb.logikal.Value
 import com.logikaldb.logikal.Variable
-import com.logikaldb.selectBy
 import kotlinx.coroutines.runBlocking
 
 /*
@@ -79,7 +78,7 @@ private fun main() {
 
         // Read out the query from the db and evaluate it, but only ask for the murder as the result
         logikalDB.read(listOf("example", "murderMystery"), "murderer")
-            .selectBy(logikalDB, murder)
+            .select(murder)
             .forEach { println("Result: $it") }
     }
 }

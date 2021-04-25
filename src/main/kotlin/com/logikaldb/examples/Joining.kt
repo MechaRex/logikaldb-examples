@@ -5,8 +5,6 @@ import com.logikaldb.Constraint.eq
 import com.logikaldb.Constraint.or
 import com.logikaldb.Constraint.vr
 import com.logikaldb.LogikalDB
-import com.logikaldb.join
-import com.logikaldb.selectBy
 import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
 
@@ -54,7 +52,7 @@ private fun main() {
 
         // Run the join query and print out the results
         employees.join(joinGoal, departments)
-            .selectBy(logikalDB)
+            .select()
             .forEach { println("Result by joining two tables: $it") }
     }
 }

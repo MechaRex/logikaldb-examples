@@ -15,9 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.logikaldb:logikaldb:0.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxVersion")
+    implementation("com.logikaldb:logikaldb:0.2.0-SNAPSHOT")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
