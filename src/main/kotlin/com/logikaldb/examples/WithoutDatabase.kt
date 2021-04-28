@@ -2,6 +2,8 @@ package com.logikaldb.examples
 
 import com.logikaldb.Constraint
 import com.logikaldb.Constraint.and
+import com.logikaldb.Constraint.eq
+import com.logikaldb.Constraint.vr
 import com.logikaldb.LogikalDB
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
@@ -11,13 +13,16 @@ private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
+        val pokemonName = vr("name")
+        val pokemonType = vr("type")
+
         val dataset = Constraint.or(
-            and(Constraint.eq(Constraint.vr("name"), "Bulbasaur"), Constraint.eq(Constraint.vr("type"), "Grass")),
-            and(Constraint.eq(Constraint.vr("name"), "Charmander"), Constraint.eq(Constraint.vr("type"), "Fire")),
-            and(Constraint.eq(Constraint.vr("name"), "Squirtle"), Constraint.eq(Constraint.vr("type"), "Water")),
-            and(Constraint.eq(Constraint.vr("name"), "Vulpix"), Constraint.eq(Constraint.vr("type"), "Fire"))
+            and(eq(pokemonName, "Bulbasaur"), eq(pokemonType, "Grass")),
+            and(eq(pokemonName, "Charmander"), eq(pokemonType, "Fire")),
+            and(eq(pokemonName, "Squirtle"), eq(pokemonType, "Water")),
+            and(eq(pokemonName, "Vulpix"), eq(pokemonType, "Fire"))
         )
-        val query = Constraint.eq(Constraint.vr("type"), "Fire")
+        val query = eq(pokemonType, "Fire")
 
         // Query tha dataset without using the database
         logikalDB

@@ -1,5 +1,8 @@
 # LogikalDB examples
 
+## Prerequisite
+Install [FoubndationDB client and server](https://www.foundationdb.org/download/)
+
 ## Examples:
 QuickExample shows:
 - how to insert a simple pokemon dataset into the db and

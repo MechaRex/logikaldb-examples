@@ -5,29 +5,30 @@ import com.logikaldb.Constraint.eq
 import com.logikaldb.Constraint.or
 import com.logikaldb.Constraint.vr
 import com.logikaldb.LogikalDB
-import com.logikaldb.and
-import com.logikaldb.selectBy
 import kotlinx.coroutines.runBlocking
 
 private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
+        val pokemonName = vr("name")
+        val pokemonType = vr("type")
+
         val dataset = or(
-            and(eq(vr("name"), "Bulbasaur"), eq(vr("type"), "Grass")),
-            and(eq(vr("name"), "Charmander"), eq(vr("type"), "Fire")),
-            and(eq(vr("name"), "Squirtle"), eq(vr("type"), "Water")),
-            and(eq(vr("name"), "Vulpix"), eq(vr("type"), "Fire"))
+            and(eq(pokemonName, "Bulbasaur"), eq(pokemonType, "Grass")),
+            and(eq(pokemonName, "Charmander"), eq(pokemonType, "Fire")),
+            and(eq(pokemonName, "Squirtle"), eq(pokemonType, "Water")),
+            and(eq(pokemonName, "Vulpix"), eq(pokemonType, "Fire"))
         )
-        val query = eq(vr("type"), "Fire")
+        val query = eq(pokemonType, "Fire")
 
         // Write the dataset to the database
         logikalDB.write(listOf("example", "quick"), "pokemon", dataset)
 
-        // Query the pokemon, which type is fire and finally print out the results
+        // Query the pokemon, which type is fire and finally print out the name of the found pokemons
         logikalDB.read(listOf("example", "quick"), "pokemon")
             .and(query)
-            .selectBy(logikalDB)
+            .select(pokemonName)
             .forEach { println("Result: $it") }
     }
 }
