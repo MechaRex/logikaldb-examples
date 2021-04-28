@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.logikaldb:logikaldb:0.2.0-SNAPSHOT")
+    implementation("com.logikaldb:logikaldb:0.2.0")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
