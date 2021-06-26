@@ -13,8 +13,8 @@ private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
-        val pokemonName = vr("name")
-        val pokemonType = vr("type")
+        val pokemonName = vr("name", String::class.java)
+        val pokemonType = vr("type", String::class.java)
 
         val dataset = Constraint.or(
             and(eq(pokemonName, "Bulbasaur"), eq(pokemonType, "Grass")),
