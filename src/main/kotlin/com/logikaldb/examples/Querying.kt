@@ -14,10 +14,10 @@ private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
-        val firstName = vr("firstName")
-        val lastName = vr("lastName")
-        val department = vr("department")
-        val salary = vr("salary")
+        val firstName = vr("firstName", String::class.java)
+        val lastName = vr("lastName", String::class.java)
+        val department = vr("department", String::class.java)
+        val salary = vr("salary", BigDecimal::class.java)
 
         // Write employee data to the database
         logikalDB.write(

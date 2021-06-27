@@ -8,7 +8,6 @@ import com.logikaldb.LogikalDB
 import com.logikaldb.StdLib.inSet
 import com.logikaldb.StdLib.notEq
 import com.logikaldb.entity.Goal
-import com.logikaldb.logikal.Value
 import com.logikaldb.logikal.Variable
 import kotlinx.coroutines.runBlocking
 
@@ -16,28 +15,28 @@ import kotlinx.coroutines.runBlocking
 * Implemented the murder mystery from this website: https://xmonader.github.io/prolog/2018/12/21/solving-murder-prolog.html
 * */
 
-private val manSet = setOf<Value>("George", "John", "Robert")
-private val womanSet = setOf<Value>("Barbara", "Christine", "Yolanda")
+private val manSet = setOf("George", "John", "Robert")
+private val womanSet = setOf("Barbara", "Christine", "Yolanda")
 
-private val bathroom = vr("bathroom")
-private val diningRoom = vr("diningRoom")
-private val kitchen = vr("kitchen")
-private val livingRoom = vr("livingRoom")
-private val pantry = vr("pantry")
-private val study = vr("study")
+private val bathroom = vr("bathroom", String::class.java)
+private val diningRoom = vr("diningRoom", String::class.java)
+private val kitchen = vr("kitchen", String::class.java)
+private val livingRoom = vr("livingRoom", String::class.java)
+private val pantry = vr("pantry", String::class.java)
+private val study = vr("study", String::class.java)
 
-private val bag = vr("bag")
-private val firearm = vr("firearm")
-private val gas = vr("gas")
-private val knife = vr("knife")
-private val poison = vr("poison")
-private val rope = vr("rope")
+private val bag = vr("bag", String::class.java)
+private val firearm = vr("firearm", String::class.java)
+private val gas = vr("gas", String::class.java)
+private val knife = vr("knife", String::class.java)
+private val poison = vr("poison", String::class.java)
+private val rope = vr("rope", String::class.java)
 
-private val murder = vr("murder")
+private val murder = vr("murder", String::class.java)
 
-private fun people(variable: Variable): Goal = or(inSet(variable, manSet), inSet(variable, womanSet))
+private fun people(variable: Variable<String>): Goal = or(inSet(variable, manSet), inSet(variable, womanSet))
 
-private fun uniquePeople(peopleVariables: List<Variable>): Goal {
+private fun uniquePeople(peopleVariables: List<Variable<String>>): Goal {
     val peopleGoals = peopleVariables.map(::people)
     val uniquePeopleGoals = mutableListOf<Goal>()
     val numberOfPeople = peopleVariables.size - 1
