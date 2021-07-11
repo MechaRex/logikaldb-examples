@@ -1,9 +1,9 @@
 package com.logikaldb.examples
 
-import com.logikaldb.Constraint.and
-import com.logikaldb.Constraint.eq
-import com.logikaldb.Constraint.or
-import com.logikaldb.Constraint.vr
+import com.logikaldb.ConstraintFactory.and
+import com.logikaldb.ConstraintFactory.eq
+import com.logikaldb.ConstraintFactory.or
+import com.logikaldb.ConstraintFactory.field
 import com.logikaldb.LogikalDB
 import com.logikaldb.StdLib.notEq
 import kotlinx.coroutines.flow.collect
@@ -14,10 +14,10 @@ private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
-        val firstName = vr("firstName", String::class.java)
-        val lastName = vr("lastName", String::class.java)
-        val department = vr("department", String::class.java)
-        val salary = vr("salary", BigDecimal::class.java)
+        val firstName = field("firstName", String::class.java)
+        val lastName = field("lastName", String::class.java)
+        val department = field("department", String::class.java)
+        val salary = field("salary", BigDecimal::class.java)
 
         // Write employee data to the database
         logikalDB.write(

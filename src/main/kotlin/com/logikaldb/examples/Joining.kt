@@ -1,9 +1,9 @@
 package com.logikaldb.examples
 
-import com.logikaldb.Constraint.and
-import com.logikaldb.Constraint.eq
-import com.logikaldb.Constraint.or
-import com.logikaldb.Constraint.vr
+import com.logikaldb.ConstraintFactory.and
+import com.logikaldb.ConstraintFactory.eq
+import com.logikaldb.ConstraintFactory.or
+import com.logikaldb.ConstraintFactory.field
 import com.logikaldb.LogikalDB
 import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
@@ -12,10 +12,10 @@ private fun main() {
     runBlocking {
         val logikalDB = LogikalDB()
 
-        val empFirstName = vr("employee.firstName", String::class.java)
-        val empLastName = vr("employee.lastName", String::class.java)
-        val empDepartment = vr("employee.department", String::class.java)
-        val empSalary = vr("employee.salary", BigDecimal::class.java)
+        val empFirstName = field("employee.firstName", String::class.java)
+        val empLastName = field("employee.lastName", String::class.java)
+        val empDepartment = field("employee.department", String::class.java)
+        val empSalary = field("employee.salary", BigDecimal::class.java)
 
         // Write employee data to the database
         logikalDB.write(
@@ -29,9 +29,9 @@ private fun main() {
             )
         )
 
-        val depDepartmentName = vr("employee.departmentName", String::class.java)
-        val depManager = vr("department.manager", String::class.java)
-        val depManagerEmail = vr("department.managerEmail", String::class.java)
+        val depDepartmentName = field("employee.departmentName", String::class.java)
+        val depManager = field("department.manager", String::class.java)
+        val depManagerEmail = field("department.managerEmail", String::class.java)
 
         // Write department data to the database
         logikalDB.write(
