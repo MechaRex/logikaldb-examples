@@ -1,14 +1,14 @@
 package com.logikaldb.examples
 
-import com.logikaldb.Constraint.and
-import com.logikaldb.Constraint.eq
-import com.logikaldb.Constraint.or
-import com.logikaldb.Constraint.vr
+import com.logikaldb.ConstraintFactory.and
+import com.logikaldb.ConstraintFactory.eq
+import com.logikaldb.ConstraintFactory.or
+import com.logikaldb.ConstraintFactory.field
 import com.logikaldb.LogikalDB
 import com.logikaldb.StdLib.inSet
 import com.logikaldb.StdLib.notEq
-import com.logikaldb.entity.Goal
-import com.logikaldb.logikal.Variable
+import com.logikaldb.entity.Constraint
+import com.logikaldb.logikal.Field
 import kotlinx.coroutines.runBlocking
 
 /*
@@ -18,27 +18,27 @@ import kotlinx.coroutines.runBlocking
 private val manSet = setOf("George", "John", "Robert")
 private val womanSet = setOf("Barbara", "Christine", "Yolanda")
 
-private val bathroom = vr("bathroom", String::class.java)
-private val diningRoom = vr("diningRoom", String::class.java)
-private val kitchen = vr("kitchen", String::class.java)
-private val livingRoom = vr("livingRoom", String::class.java)
-private val pantry = vr("pantry", String::class.java)
-private val study = vr("study", String::class.java)
+private val bathroom = field("bathroom", String::class.java)
+private val diningRoom = field("diningRoom", String::class.java)
+private val kitchen = field("kitchen", String::class.java)
+private val livingRoom = field("livingRoom", String::class.java)
+private val pantry = field("pantry", String::class.java)
+private val study = field("study", String::class.java)
 
-private val bag = vr("bag", String::class.java)
-private val firearm = vr("firearm", String::class.java)
-private val gas = vr("gas", String::class.java)
-private val knife = vr("knife", String::class.java)
-private val poison = vr("poison", String::class.java)
-private val rope = vr("rope", String::class.java)
+private val bag = field("bag", String::class.java)
+private val firearm = field("firearm", String::class.java)
+private val gas = field("gas", String::class.java)
+private val knife = field("knife", String::class.java)
+private val poison = field("poison", String::class.java)
+private val rope = field("rope", String::class.java)
 
-private val murder = vr("murder", String::class.java)
+private val murder = field("murder", String::class.java)
 
-private fun people(variable: Variable<String>): Goal = or(inSet(variable, manSet), inSet(variable, womanSet))
+private fun people(variable: Field<String>): Constraint = or(inSet(variable, manSet), inSet(variable, womanSet))
 
-private fun uniquePeople(peopleVariables: List<Variable<String>>): Goal {
+private fun uniquePeople(peopleVariables: List<Field<String>>): Constraint {
     val peopleGoals = peopleVariables.map(::people)
-    val uniquePeopleGoals = mutableListOf<Goal>()
+    val uniquePeopleGoals = mutableListOf<Constraint>()
     val numberOfPeople = peopleVariables.size - 1
     for (i in 0..numberOfPeople) {
         for (j in i + 1..numberOfPeople) {
@@ -48,7 +48,7 @@ private fun uniquePeople(peopleVariables: List<Variable<String>>): Goal {
     return and(peopleGoals + uniquePeopleGoals)
 }
 
-private fun murderer(): Goal {
+private fun murderer(): Constraint {
     val entry = and(
         uniquePeople(listOf(bathroom, diningRoom, kitchen, livingRoom, pantry, study)),
         uniquePeople(listOf(bag, firearm, gas, knife, poison, rope))
